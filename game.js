@@ -8,32 +8,30 @@ let keys = {};
 let gameEnded = false;
 let marioFrame = 0;
 let marioImage = new Image();
-marioImage.src = 'mario-sprites.png'; // Load the sprite sheet
+marioImage.src = 'mario-sprites.png'; // Make sure Mario sprite is in your project folder
 
-// Walking frames: Let's assume Mario has 3 frames for walking right.
+// Walking frames for Mario (these are the coordinates for the sprite sheet)
 const marioFrames = { 
-  right: [0, 40, 80], // Frame positions for right direction in sprite sheet (adjust these based on your sprite sheet)
-  left: [120, 160, 200] // Frame positions for left direction in sprite sheet
+  right: [0, 40, 80], // Frame positions for right direction (adjust based on your sprite sheet)
+  left: [120, 160, 200] // Frame positions for left direction (adjust based on your sprite sheet)
 };
 
 // Input handling
 document.addEventListener("keydown", (e) => keys[e.key] = true);
 document.addEventListener("keyup", (e) => keys[e.key] = false);
 
-// Draw player with animation
+// Draw player with walking animation
 function drawPlayer() {
-  // Mario walking animation
-  let frameX = marioFrames[player.direction][marioFrame];
-  
-  ctx.drawImage(marioImage, frameX, 0, 40, 40, player.x, player.y, player.width, player.height); // Drawing Mario
-  
-  // Update frame for animation
+  let frameX = marioFrames[player.direction][marioFrame]; // Get frame for walking animation
+  ctx.drawImage(marioImage, frameX, 0, 40, 40, player.x, player.y, player.width, player.height); // Draw Mario
+
+  // Update frame for animation (cycle through the 3 frames)
   if (player.direction === 'right' || player.direction === 'left') {
     marioFrame = (marioFrame + 1) % 3; // Loop through 3 frames for walking animation
   }
 }
 
-// Draw platforms
+// Draw platforms (game ground)
 function drawPlatforms() {
   ctx.fillStyle = "#d3cfc7";
   platforms.forEach(p => {
@@ -41,7 +39,7 @@ function drawPlatforms() {
   });
 }
 
-// Draw hearts
+// Draw hearts (collectables)
 function drawHearts() {
   ctx.font = "20px Arial";
   hearts.forEach(heart => {
@@ -51,10 +49,10 @@ function drawHearts() {
   });
 }
 
-// Jump sound effect
-const jumpSound = new Audio('jump.mp3'); // Ensure you have a jump sound file in your project folder
+// Jump sound effect (ensure you have a jump.mp3 file in your project folder)
+const jumpSound = new Audio('jump.mp3');
 
-// Update player logic
+// Update player position and physics
 function updatePlayer() {
   // Movement
   if (keys["ArrowRight"]) {
@@ -119,7 +117,7 @@ function gameLoop() {
   }
 }
 
-// Trigger love truck
+// Trigger love truck when all hearts are collected
 function triggerLoveTruck() {
   const truck = document.getElementById("loveTruck");
   truck.classList.remove("hidden");
