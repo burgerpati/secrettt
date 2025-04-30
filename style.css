@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  background-color: #faf4f0;
+  font-family: 'Helvetica Neue', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#game {
+  position: relative;
+}
+
+canvas {
+  background-color: #fefefe;
+  border: 1px solid #e0e0e0;
+  display: block;
+}
+
+#loveTruck {
+  position: absolute;
+  bottom: 30px;
+  left: -200px;
+  display: flex;
+  align-items: center;
+  animation: drive 4s ease-in-out forwards;
+}
+
+.truck {
+  font-size: 48px;
+  margin-right: 10px;
+}
+
+.letter {
+  font-size: 24px;
+  color: #c45a7b;
+  font-weight: bold;
+  opacity: 0;
+  animation: fadeIn 3s forwards 3s;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes drive {
+  to {
+    left: 300px;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
