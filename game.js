@@ -6,9 +6,13 @@ let gravity = 0.8;
 let jumpPower = -12;
 let keys = {};
 let platforms = [{ x: 0, y: 270, width: 800, height: 30 }];
+let hearts = [
+  { x: 200, y: 230, collected: false },
+  { x: 400, y: 230, collected: false },
+  { x: 600, y: 230, collected: false },
+];
 let gameEnded = false;
 
-// Handle input
 document.addEventListener("keydown", (e) => keys[e.key] = true);
 document.addEventListener("keyup", (e) => keys[e.key] = false);
 
@@ -24,6 +28,15 @@ function drawPlatforms() {
   }
 }
 
+function drawHearts() {
+  ctx.font = "20px Arial";
+  for (let heart of hearts) {
+    if (!heart.collected) {
+      ctx.fillText("❤️", heart.x, heart.y);
+    }
+  }
+}
+
 function updatePlayer() {
   if (keys[" "] && player.onGround) {
     player.vy = jumpPower;
@@ -33,7 +46,7 @@ function updatePlayer() {
   player.vy += gravity;
   player.y += player.vy;
 
-  // Collision
+  // Collision with ground
   for (let plat of platforms) {
     if (player.y + player.height >= plat.y && player.y + player.height <= plat.y + 10 &&
         player.x + player.width > plat.x && player.x < plat.x + plat.width) {
@@ -47,8 +60,22 @@ function updatePlayer() {
     player.x += 3;
   }
 
-  // End condition
-  if (player.x > 700 && !gameEnded) {
+  if (keys["ArrowLeft"]) {
+    player.x -= 3;
+  }
+
+  // Heart collection
+  for (let heart of hearts) {
+    if (!heart.collected &&
+        player.x + player.width > heart.x - 10 &&
+        player.x < heart.x + 10 &&
+        player.y < heart.y + 10 &&
+        player.y + player.height > heart.y - 20) {
+      heart.collected = true;
+    }
+  }
+
+  if (hearts.every(h => h.collected) && !gameEnded) {
     triggerLoveTruck();
     gameEnded = true;
   }
@@ -58,6 +85,7 @@ function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawPlatforms();
   drawPlayer();
+  drawHearts();
   updatePlayer();
 
   if (!gameEnded) {
