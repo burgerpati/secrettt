@@ -1,0 +1,76 @@
+body {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  text-align: center;
+  background: linear-gradient(to bottom, #ffe4e1, #fff);
+  margin: 0;
+  padding: 0;
+}
+
+#intro {
+  padding: 60px 20px;
+  animation: fadeIn 2s ease;
+}
+
+#intro h1 {
+  font-size: 2.5em;
+  color: #e91e63;
+}
+
+#intro p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+#intro button {
+  padding: 12px 24px;
+  font-size: 1em;
+  background-color: #f06292;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#game {
+  padding: 40px 20px;
+}
+
+#cat {
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
+  background-image: url('https://cdn.pixabay.com/photo/2021/04/18/09/13/cat-6186929_960_720.png');
+  background-size: cover;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+#cat:active {
+  transform: scale(1.05);
+}
+
+#bar-container {
+  width: 80%;
+  max-width: 400px;
+  height: 30px;
+  margin: 20px auto;
+  background-color: #ddd;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+#happiness-bar {
+  height: 100%;
+  background-color: #4caf50;
+  width: 100%;
+  transition: width 0.3s;
+}
+
+#status, #cat-talk {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
