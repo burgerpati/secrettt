@@ -1,0 +1,22 @@
+body {
+  background: #eaf7ef;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.nds {
+  background: #c5e5c5;
+  padding: 8px;
+  border: 4px solid #8ac48a;
+  box-shadow: inset 4px 4px 0 #9bd29b, inset -4px -4px 0 #a3dfa3;
+  image-rendering: pixelated;
+}
+canvas {
+  display: block;
+  width: 480px;
+  height: 192px;
+  image-rendering: pixelated;
+  margin-bottom: 4px;
+}
